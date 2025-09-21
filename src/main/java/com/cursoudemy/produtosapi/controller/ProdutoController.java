@@ -3,11 +3,9 @@ package com.cursoudemy.produtosapi.controller;
 import com.cursoudemy.produtosapi.model.Produto;
 import com.cursoudemy.produtosapi.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -28,5 +26,13 @@ public class ProdutoController {
         repository.save(produto);//grava o produto na tabela
         return  produto;
 
+    }
+
+    @GetMapping("{id}")
+    public Produto obterPorId(@PathVariable("id") String id){//o metodo recebe o id da entidade como parâmetro
+//        Optional<Produto> produto = repository.findById(id);
+//        return produto.isPresent() ? produto.get() :  null;
+
+        return repository.findById(id).orElse(null);//retorna de repositório o produto que possui o id passado, ou null se não encontrou na base
     }
 }
