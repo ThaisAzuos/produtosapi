@@ -35,4 +35,9 @@ public class ProdutoController {
 
         return repository.findById(id).orElse(null);//retorna de repositório o produto que possui o id passado, ou null se não encontrou na base
     }
+
+    @DeleteMapping("{id}")
+    public void deletar(@PathVariable String id){
+        repository.deleteById(id);
+    }
 }
