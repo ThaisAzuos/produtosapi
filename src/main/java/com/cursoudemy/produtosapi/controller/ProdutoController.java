@@ -5,6 +5,7 @@ import com.cursoudemy.produtosapi.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,5 +46,12 @@ public class ProdutoController {
     public void atualizar(@PathVariable("id") String id, @RequestBody Produto produto){
         produto.setId(id);//seta na entidade o id passado via parâmetro
         repository.save(produto);//atualiza os dados na tabela com base no que foi informado no corpo da requisição.
+    }
+
+    @GetMapping
+    public List<Produto> buscar(@RequestParam("nome") String nome){//trás a lista de produtos que possuem o nome passado via parm
+
+        return repository.findByNome(nome);
+
     }
 }
